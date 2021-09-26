@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OdooService", "Odoo\OdooSer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{BE5526BF-B8AB-448E-841F-3994317DACF5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{AC5BC5D5-C90F-4E23-9FAA-0BA8B7A2BD9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{BE5526BF-B8AB-448E-841F-3994317DACF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE5526BF-B8AB-448E-841F-3994317DACF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE5526BF-B8AB-448E-841F-3994317DACF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC5BC5D5-C90F-4E23-9FAA-0BA8B7A2BD9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC5BC5D5-C90F-4E23-9FAA-0BA8B7A2BD9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC5BC5D5-C90F-4E23-9FAA-0BA8B7A2BD9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC5BC5D5-C90F-4E23-9FAA-0BA8B7A2BD9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

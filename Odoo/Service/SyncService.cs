@@ -7,23 +7,42 @@ namespace Odoo
 {
     public class SyncService : IService
     {
-        private ILogger _logger;
-        private IOrchestrator _orchestrator;
+        ILogger _logger;
+        IOrchestrator _orchestrator;
+        bool _isInit = false;
         public SyncService(ILogger logger)
         {
-            _logger = logger;
-            _orchestrator = new SyncOrchestrator(_logger);
+            this._logger = logger;
+            this._isInit = this.Init();
         }
 
         public async Task StartServiceAsync()
         {
             var result = await Task.Run(() =>
             {
-                _logger.Log(LogRecordType.info, "Kicking off orchestrator in service ..........");
+                if (!this._isInit)
+                {
+                    this._logger.Log(LogRecordType.error, "Initialization failure in Odoo Service ..........");
+                    return false;
+                }
                 this._orchestrator.RunOrchestratorAsync();
                 return true;
             });
             return;
+        }
+
+        private bool Init()
+        {
+            bool initResult = true;
+            var serviceProvider = Startup.GetInstance().Init(this._logger);
+            if (serviceProvider == null)
+            {
+                initResult = false;
+                this._logger.Log(Common.Enums.LogRecordType.error, "Error in initialization of SyncService.");
+                return initResult;
+            }
+            this._orchestrator = serviceProvider.GetService<IOrchestrator>();
+            return initResult;
         }
     }
 }
