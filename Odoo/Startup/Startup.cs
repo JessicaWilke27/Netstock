@@ -1,6 +1,7 @@
 ﻿using Common.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Odoo.Interfaces;
+using Odoo.Repositories;
 using System;
 
 namespace Odoo
@@ -30,6 +31,7 @@ namespace Odoo
                 serviceCollection.AddSingleton<IConfig, Config>();
                 serviceCollection.AddSingleton<IAuthenticator, Authenticator>();             
                 serviceCollection.AddSingleton<IOrchestrator, SyncOrchestrator>();
+                serviceCollection.AddScoped<IRepository, Repository>();
 
                 serviceProvider = serviceCollection.BuildServiceProvider();
             }
