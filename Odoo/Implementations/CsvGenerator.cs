@@ -15,8 +15,12 @@ namespace Odoo
         private static Dictionary<Type, ClassMap> TypeMapper = new Dictionary<Type, ClassMap>()
         {
             {typeof(MasterModel),new CsvMasterModel()},
+            {typeof(SupplierModel),new CsvSupplierModel()},
+            {typeof(LocationModel),new CsvLocationModel()},
+            {typeof(PoHistModel),new CsvPoHistModel()},
+            {typeof(PoLineModel),new CsvPoOutModel()}
         };
-
+        
         public static void GenerateCsv<T>(string path, T[] data)
         {
             CsvConfiguration config = new CsvConfiguration(System.Globalization.CultureInfo.InvariantCulture);

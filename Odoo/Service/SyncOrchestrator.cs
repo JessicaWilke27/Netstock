@@ -32,9 +32,18 @@ namespace Odoo
                 var connectionStringAuthenticated = this._authenticator.Authenticate(connectionStringStart);
 
                 IRepository repoMasterData = _getRepoFunc(typeof(MasterDataRepository).Name);
+                IRepository repoLocationData = _getRepoFunc(typeof(LocationDataRepository).Name);
+                IRepository repoSupplierData = _getRepoFunc(typeof(SupplierDataRepository).Name);
+                IRepository repoPoLineData = _getRepoFunc(typeof(PoLineDataRepository).Name);
+                IRepository repoPoHistData = _getRepoFunc(typeof(PoHistDataRepository).Name);
 
                 var taskList = new List<Task>();
                 taskList.Add(Task.Run(() => repoMasterData.GetData<MasterModel>(connectionStringAuthenticated, $"{this._outputDir}master.csv", new ProcessDataDelegate<MasterModel>(CallbackImplementations.ProcessData))));
+                taskList.Add(Task.Run(() => repoLocationData.GetData<LocationModel>(connectionStringAuthenticated, $"{this._outputDir}location.csv", new ProcessDataDelegate<LocationModel>(CallbackImplementations.ProcessData))));
+                taskList.Add(Task.Run(() => repoSupplierData.GetData<SupplierModel>(connectionStringAuthenticated, $"{this._outputDir}supplier.csv", new ProcessDataDelegate<SupplierModel>(CallbackImplementations.ProcessData))));
+                taskList.Add(Task.Run(() => repoPoLineData.GetData<PoLineModel>(connectionStringAuthenticated, $"{this._outputDir}po.csv", new ProcessDataDelegate<PoLineModel>(CallbackImplementations.ProcessData))));
+                taskList.Add(Task.Run(() => repoPoHistData.GetData<PoHistModel>(connectionStringAuthenticated, $"{this._outputDir}pohist.csv", new ProcessDataDelegate<PoHistModel>(CallbackImplementations.ProcessData))));
+
                 Task.WaitAll(taskList.ToArray());
             }
             catch (Exception ex)

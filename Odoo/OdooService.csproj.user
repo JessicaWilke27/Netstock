@@ -5,7 +5,22 @@
     <Compile Update="Repositories\AbstractRepository.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Repositories\LocationDataRepository.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Repositories\MasterDataRepository.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Repositories\PoDataRepository.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Repositories\PoHistDataRepository.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Repositories\PoLineDataRepository.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Repositories\SupplierDataRepository.cs">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>

@@ -32,6 +32,10 @@ namespace Odoo
                 serviceCollection.AddSingleton<IAuthenticator, Authenticator>();
                 serviceCollection.AddSingleton<IOrchestrator, SyncOrchestrator>();
                 serviceCollection.AddScoped<IRepository, MasterDataRepository>();
+                serviceCollection.AddScoped<IRepository, LocationDataRepository>();
+                serviceCollection.AddScoped<IRepository, SupplierDataRepository>();
+                serviceCollection.AddScoped<IRepository, PoLineDataRepository>();
+                serviceCollection.AddScoped<IRepository, PoHistDataRepository>();
                 serviceCollection.AddSingleton<RepositoryFactory, RepositoryFactory>();
                 serviceCollection.AddTransient<Func<string, IRepository>>
                 (serviceProvider => new Func<string, IRepository>

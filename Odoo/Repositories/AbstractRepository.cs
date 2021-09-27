@@ -24,7 +24,7 @@ namespace Odoo.Repositories
             _logger.Log(LogRecordType.info, "Fetching config from Odoo Start ..........");
             try
             {
-                proxy.Url = ConfigurationManager.AppSettings["SyncHost"];
+                proxy.Url = ConfigurationManager.AppSettings["SyncHost"];   
                 StartStruct start = proxy.GetStartConfig();
 
                 _logger.Log(LogRecordType.info, "Odoo Start Config successfully retrieved..........");
@@ -58,9 +58,10 @@ namespace Odoo.Repositories
         {
             IOdooProxy2<T> proxy2 = XmlRpcProxyGen.Create<IOdooProxy2<T>>();
 
-            _logger.Log(LogRecordType.info, "Fetching data .........."); 
+            _logger.Log(LogRecordType.info, "Fetching data ..........");
             proxy2.Url = $"{(string)connectionString["host"]}/xmlrpc/2/object";
             var filter = new FilterStruct();
+            //filter.limit = 1;
 
             filter.fields = GetFieldsList();
             string modelName = GetModelName();
@@ -77,7 +78,45 @@ namespace Odoo.Repositories
                 //throw e;
             }
         }
-        
+
+        public virtual T[] GetData<T>(DbConnectionStringBuilder connectionString)
+        {
+            IOdooProxy2<T> proxy2 = XmlRpcProxyGen.Create<IOdooProxy2<T>>();
+            proxy2.Url = $"{(string)connectionString["host"]}/xmlrpc/2/object";
+            var filter = new FilterStruct();
+            filter.fields = this.GetFieldsList();
+            string modelName = GetModelName();
+            try
+            {
+                var response = proxy2.GetData((string)connectionString["database"], int.Parse((string)connectionString["uid"]), (string)connectionString["password"], modelName, "search_read", new object[] { new string[] { } }, filter);
+                return response;
+            }
+            catch (Exception e)
+            {
+                _logger.Log(LogRecordType.info, $"Failed fetching {modelName} data. {e.Message}");
+                throw e;
+            }
+        }
+
+        public virtual T[] GetData<T>(DbConnectionStringBuilder connectionString, string[] fields, string modelName)
+        {
+            IOdooProxy2<T> proxy2 = XmlRpcProxyGen.Create<IOdooProxy2<T>>();
+            proxy2.Url = $"{(string)connectionString["host"]}/xmlrpc/2/object";
+            var filter = new FilterStruct();
+            filter.fields = fields; 
+            
+            try
+            {
+                var response = proxy2.GetData((string)connectionString["database"], int.Parse((string)connectionString["uid"]), (string)connectionString["password"], modelName, "search_read", new object[] { new string[] { } }, filter);
+                return response;
+            }
+            catch (Exception e)
+            {
+                _logger.Log(LogRecordType.info, $"Failed fetching {modelName} data. {e.Message}");
+                throw e;
+            }
+        }
+
         protected abstract string[] GetFieldsList();
         protected abstract string GetModelName();
 
