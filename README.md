@@ -4,8 +4,9 @@ Release Notes
   Odoo integration assessment is a .NET Core 3.1 solution, developed and tested on Visual Studio 2019.
 Source Code
   All source code can be found on GitHub https://github.com/JessicaWilke27/Netstock 
-  To run
-  To build and run source code:
+  
+  To run with visual studio
+  
   1.	Download source code from repository
   2.	Open “Netstock.sln” in Visual Studio
   3.	Set “NetstockConsole” as StartUp project
@@ -13,8 +14,20 @@ Source Code
   5.	Run NetstockConsole
  
   *Note: The project will run all processing every minute. To change configuration, time interval can be set in App.config file. Different schedules (minutes, hourly and daily)  are present. Scheduler to be used can also be defined in the config file.
-  After every run all generated CSV files will be saved in the location defined in the config. Defaults to Netstock\Console\bin\Debug\Output 
   
+  After every run all generated CSV files will be saved in the location defined in the config. Defaults to Netstock\Console\bin\Debug\Output 
+
+To Run without Visual Studio
+
+1.	Download source code from repository
+2.	Location NetstockConsole.exe – \Location of code\Netstock\Publish\ProgramFiles\NetstockConsole.exe
+3.	Run NetstockConsole.exe
+
+*Note: The project will run all processing every minute. To change configuration, time interval can be set in App.config file. Different schedules (minutes, hourly and daily) are present. Scheduler to be used can also be defined in the config file.
+
+After every run all generated CSV files will be saved in the location defined in the config. Defaults to – \Location of code\Netstock\Publish\Output 
+
+
 Overview
 
   Following aspects have been addressed during the design and implementation phase:
