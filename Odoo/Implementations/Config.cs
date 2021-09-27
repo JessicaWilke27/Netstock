@@ -1,6 +1,8 @@
 ﻿using Models;
 using Odoo.Interfaces;
+using System.Configuration;
 using System.Data.Common;
+using System.IO;
 
 namespace Odoo
 {
@@ -23,6 +25,16 @@ namespace Odoo
             conStringBuilder.ConnectionString = connectionString;
 
             return conStringBuilder;
+        }
+        
+        string IConfig.GetOuputDir()
+        {
+            string path = ConfigurationManager.AppSettings["OuputDir"];
+            if (!Directory.Exists(path))
+            {
+                DirectoryInfo di = Directory.CreateDirectory(path);
+            }
+            return path;
         }
     }
 }

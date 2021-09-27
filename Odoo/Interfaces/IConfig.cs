@@ -5,6 +5,7 @@ namespace Odoo.Interfaces
     public interface IConfig
     {
         DbConnectionStringBuilder GetConnectionString();
-        
+        string GetOuputDir();
+
     }
 }

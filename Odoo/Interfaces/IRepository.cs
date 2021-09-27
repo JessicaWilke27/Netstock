@@ -1,5 +1,6 @@
 ﻿using Models;
 using System.Data.Common;
+using static Odoo.Callbacks.CallbackDelegates;
 
 namespace Odoo.Interfaces
 {
@@ -7,6 +8,6 @@ namespace Odoo.Interfaces
     {
         StartStruct GetStartConfig();
         int Authenticate(DbConnectionStringBuilder dbConnectionStringBuilder);
-
+        void GetData<T>(DbConnectionStringBuilder connectionString, string path, ProcessDataDelegate<T> processDataDelegate);
     }
 }

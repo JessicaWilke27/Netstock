@@ -29,9 +29,18 @@ namespace Odoo
                 var serviceCollection = new ServiceCollection();
                 serviceCollection.AddSingleton<ILogger>(logger);
                 serviceCollection.AddSingleton<IConfig, Config>();
-                serviceCollection.AddSingleton<IAuthenticator, Authenticator>();             
+                serviceCollection.AddSingleton<IAuthenticator, Authenticator>();
                 serviceCollection.AddSingleton<IOrchestrator, SyncOrchestrator>();
-                serviceCollection.AddScoped<IRepository, Repository>();
+                serviceCollection.AddScoped<IRepository, MasterDataRepository>();
+                serviceCollection.AddSingleton<RepositoryFactory, RepositoryFactory>();
+                serviceCollection.AddTransient<Func<string, IRepository>>
+                (serviceProvider => new Func<string, IRepository>
+                    ((repoKey) =>
+                    {
+                        return serviceProvider.GetService<RepositoryFactory>().GetRepo(repoKey);
+                    }
+                    )
+                );
 
                 serviceProvider = serviceCollection.BuildServiceProvider();
             }
